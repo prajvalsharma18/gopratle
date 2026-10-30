@@ -1,4 +1,4 @@
-# GoPratle
+# GoPratle-Demo
 
 GoPratle connects event hosts with event professionals. This project includes a Next.js landing page and four-step requirement wizard, plus a separate Express API that validates and saves requirement submissions to MongoDB.
 
@@ -207,31 +207,3 @@ Never point `MONGODB_TEST_URI` at production data.
 
 The persistence test submits planner, performer, and crew examples with a unique run ID, fetches each saved document by its returned ID, checks its event/category/preferences/status/timestamps, and removes only those three records. The test refuses a database name without a `test` segment. Ordinary route tests use a stub model for response behavior and do not count as persistence verification.
 
-## Known limitations
-
-- Submission requires a reachable MongoDB instance and correctly configured environment files.
-- There is no authentication or proposal workflow in this phase. Requirement records are publicly viewable and searchable by design.
-- MongoDB persistence must be verified with a separately configured test database; ordinary backend tests do not pretend to prove database persistence.
-- Production deployment, live URLs, live persistence, and browser-to-database submission have not been verified.
-- The API limits submissions to 10 and public searches to 30 per IP per 15 minutes in a single process. A multi-instance deployment needs a shared rate-limit store to enforce global per-client quotas.
-- The public saved-requirements view returns at most 100 records per query; use the category filter or text search to find records. Event names, locations, budgets, and notes shown in results are public.
-- The proxy hop setting must match the production host topology; an incorrect trusted proxy count can affect client IP attribution for rate limiting.
-
-## Recruiter screen recording outline (about 6 minutes)
-
-Record this after deployment and the database-backed flow have been verified. Use non-sensitive sample event details and never show credentials or environment settings.
-
-1. **0:00–0:45 — Product:** introduce the homepage and how GoPratle connects event hosts with professionals.
-2. **0:45–1:30 — Event basics:** open Submit Requirements and show the first step and progress indicator.
-3. **1:30–2:45 — Categories:** demonstrate planner fields, then show how performer and crew have different fields. Complete one submission for each category using unique demo names.
-4. **2:45–3:45 — Persisted result:** show each successful API status/category/record ID and find the matching document in Atlas. Keep credentials and connection strings off-screen.
-5. **3:45–4:45 — Validation and recovery:** demonstrate a rejected invalid field or server validation response, then show answers remain available for retry.
-6. **4:45–5:30 — Responsive experience:** show the homepage and wizard at desktop and narrow mobile widths.
-7. **5:30–6:00 — Engineering wrap-up:** mention the frontend/backend architecture, automated checks, and any remaining limitations or next improvements.
-
-## Final submission checklist
-
-- **Live frontend URL:** not available; no verified deployment exists.
-- **GitHub repository URL:** not available in this workspace; no Git remote is configured.
-- **Live backend/database confirmation:** not verified; production credentials are not configured.
-- **Screen recording:** outline above is prepared; record only after live persistence has been confirmed.
